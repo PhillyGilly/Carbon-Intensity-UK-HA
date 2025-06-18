@@ -42,11 +42,11 @@ Create an text input helper called input_text.postcode_outward as below:
 ![image](https://github.com/user-attachments/assets/77928cec-ee24-4ba2-9d60-e39e7cc86a36)
 
 
-In configuration.yaml
+Add this line in configuration.yaml
 ```
 rest: !include rest.yaml
 ```
-In rest.yaml
+Create a file in ithe home Assistant config directory rest.yaml
 ```
 - resource_template: 'https://api.carbonintensity.org.uk/regional/postcode/{{states("input_text.postcode_outward")}}'
   scan_interval: 600
