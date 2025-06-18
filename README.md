@@ -9,7 +9,6 @@ $ curl -X GET https://api.carbonintensity.org.uk/regional/postcode/LE16 -H 'Acce
 ```
 Note LE16 is the first part of my postcode. You will need to add your own postcode to make this work.
 
-
 This returns a json string with a data format that looks like:
 ```
 {'data':
@@ -35,19 +34,32 @@ This returns a json string with a data format that looks like:
 ```
 This GET can be used to create a rest sensor in Home Assistant with the following yaml.    
 
+UK post codes are made up of two parts the outward, which is the post town plus a number, and the inward which defines the local street number.
+The Carbon intensity values returned are calculated for each Distribution Network Operator (DNO) which can be found from the first outward part of a postcode.
+
+Create an text input helper called input_test.postcode_outward as below:
+
+![image](https://github.com/user-attachments/assets/77928cec-ee24-4ba2-9d60-e39e7cc86a36)
+
+
 In configuration.yaml
 ```
-rest:
-- resource: https://api.carbonintensity.org.uk/regional/postcode/LE16       
+rest: !include rest.yaml
+```
+In rest.yaml
+```
+- resource_template: 'https://api.carbonintensity.org.uk/regional/postcode/{{states("input_text.postcode_outward")}}'
   scan_interval: 600
+  headers:
+    Accept: "application/json"
+    Content-Type: "application/json"
   sensor:
     - name: "Carbon Intensity PostCode"
       unique_id: carbonintensitypostcode
       unit_of_measurement: 'g/kWh'
       icon: 'mdi:molecule-co2'
       availability: "{{ value_json is defined }}"
-      value_template: "{{ value_json['data'][0]['data'][0]['intensity']['forecast'] }}"
-```
+      value_template: "{{ value_json['data'][0]['data'][0]['intensity']['forecast'] }}"```
 
 
 This could be further improved by adding postcode as an input in apps.yaml as below
