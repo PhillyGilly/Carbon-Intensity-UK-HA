@@ -1,7 +1,7 @@
 # Carbon Intensity for your Postcode
 
 This is a simple way of making the regional carbon footprint available in Home Assistant.
-For Predbat users it is alternative to the HACs addin [Carbon Intensity UK[(https://github.com/jfparis/sensor.carbon_intensity_uk) as described here in the [Predbat documentation](https://springfall2008.github.io/batpred/energy-rates/#uk-grid-carbon-intensity).
+For Predbat users it is alternative to the HACs addin [Carbon Intensity UK](https://github.com/jfparis/sensor.carbon_intensity_uk) as described here in the [Predbat documentation](https://springfall2008.github.io/batpred/energy-rates/#uk-grid-carbon-intensity).
 
 The basic premise is that you can get data directly from [National Grid's carbon intensity website](https://carbonintensity.org.uk/)
 ```
@@ -35,18 +35,19 @@ This returns a json string with a data format that looks like:
 This GET can be used to create a rest sensor in Home Assistant with the following yaml.    
 
 UK post codes are made up of two parts the outward, which is the post town plus a number, and the inward which defines the local street number.
-The Carbon intensity values returned are calculated for each Distribution Network Operator (DNO) which can be found from the first outward part of a postcode.
+The Carbon intensity values returned are calculated for each Distribution Network Operator (DNO) which can be found from the first, outward part of a postcode.
 
-Create an text input helper called input_text.postcode_outward as below:
+## Steps:
+1. Create an text input helper called input_text.postcode_outward as below:
 
 ![image](https://github.com/user-attachments/assets/77928cec-ee24-4ba2-9d60-e39e7cc86a36)
 
 
-Add this line in configuration.yaml
+2. Add this line in configuration.yaml
 ```
 rest: !include rest.yaml
 ```
-Create a file in ithe home Assistant config directory rest.yaml
+3. Create a file in ithe home Assistant config directory rest.yaml
 ```
 - resource_template: 'https://api.carbonintensity.org.uk/regional/postcode/{{states("input_text.postcode_outward")}}'
   scan_interval: 600
@@ -61,7 +62,7 @@ Create a file in ithe home Assistant config directory rest.yaml
       availability: "{{ value_json is defined }}"
       value_template: "{{ value_json['data'][0]['data'][0]['intensity']['forecast'] }}"
 ```
-If it all works you can add an entities card
+4. Add an entities card
 ```
 type: entities
 entities:
@@ -75,10 +76,12 @@ Which produces this:
 
 ![image](https://github.com/user-attachments/assets/79052169-577a-4b71-b09c-53b4b14cd5bc)
 
+## Improvement
 This could be further improved by doing away with the input_text sensor and reading the outward postcode as the left part of a postcode input in apps.yaml as below:
 
 [ <img src="https://github.com/user-attachments/assets/2b40bac2-1000-4db0-bf1f-5e05d25e5f50" width=70%  alt="Demo on YouTube"/>](https://springfall2008.github.io/batpred/energy-rates/#uk-grid-carbon-intensity)
 
+## Thanks
 Although this is my concept, the rest sensor yaml was pretty much written for me by @Troon in the HA community forum. Thank you!
 
 I also noticed that @olivershingler covered this topic in his 2023 [video](https://youtu.be/w5fcff63agY?si=CBhvuYhpmoFMVCqe)
