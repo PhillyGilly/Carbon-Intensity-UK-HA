@@ -1,3 +1,5 @@
+# Carbon Intensity for your Postcode
+
 This is a simple alternative to the HACs addin "Carbon Intensity UK" for making the regional carbon footprint available in Home Assistant and to other apps such as Predbat.
 
 The basic premise is that you can get data from National Grid's website 
@@ -34,11 +36,7 @@ This GET can be used to create a rest sensor in Home Assistant with the followin
 
 In configuration.yaml
 ```
-rest: !include rest.yaml
-```
-
-In rest.yaml
-```
+rest:
 - resource: https://api.carbonintensity.org.uk/regional/postcode/LE16       
   scan_interval: 600
   sensor:
