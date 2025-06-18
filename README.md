@@ -1,8 +1,9 @@
 # Carbon Intensity for your Postcode
 
-This is a simple alternative to the HACs addin "Carbon Intensity UK" for making the regional carbon footprint available in Home Assistant and to other apps such as Predbat.
+This is a simple way of making the regional carbon footprint available in Home Assistant.
+For Predbat users it is alternative to the HACs addin [Carbon Intensity UK[(https://github.com/jfparis/sensor.carbon_intensity_uk) as described here in the [Predbat documentation](https://springfall2008.github.io/batpred/energy-rates/#uk-grid-carbon-intensity).
 
-The basic premise is that you can get data from National Grid's website 
+The basic premise is that you can get data directly from [National Grid's carbon intensity website](https://carbonintensity.org.uk/)
 ```
 $ curl -X GET https://api.carbonintensity.org.uk/regional/postcode/LE16 -H 'Accept: application/js'
 ```
@@ -56,3 +57,5 @@ This could be further improved by adding postcode as an input in apps.yaml as be
   postcode: LE16 9xy
 ```
 Although this is my concept, the rest sensor yaml was pretty much written for me by @Troon in the HA community forum. Thank you!
+
+I also noticed that @olivershingler covered this topic in his 2023 [video](https://youtu.be/w5fcff63agY?si=CBhvuYhpmoFMVCqe)
