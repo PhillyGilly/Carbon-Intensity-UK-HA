@@ -61,14 +61,24 @@ Create a file in ithe home Assistant config directory rest.yaml
       availability: "{{ value_json is defined }}"
       value_template: "{{ value_json['data'][0]['data'][0]['intensity']['forecast'] }}"
 ```
-
-
-This could be further improved by adding postcode as an input in apps.yaml as below
+If it all works you can add an entities card
 ```
-  Carbon Intensity data from National grid
-  carbon_intensity: 're:(sensor.carbon_intensity_postcode)'
-  postcode: LE16 9xy
+type: entities
+entities:
+  - entity: input_text.postcode_outward
+  - entity: sensor.carbon_intensity_postcode
+state_color: true
+show_header_toggle: false
+title: Carbon Intensity
 ```
+Which produces this:
+
+![image](https://github.com/user-attachments/assets/79052169-577a-4b71-b09c-53b4b14cd5bc)
+
+This could be further improved by doing away with the input_text sensor and reading the outward postcode as the left part of a postcode input in apps.yaml as below:
+
+[ <img src="https://github.com/user-attachments/assets/2b40bac2-1000-4db0-bf1f-5e05d25e5f50" width=70%  alt="Demo on YouTube"/>](https://springfall2008.github.io/batpred/energy-rates/#uk-grid-carbon-intensity)
+
 Although this is my concept, the rest sensor yaml was pretty much written for me by @Troon in the HA community forum. Thank you!
 
 I also noticed that @olivershingler covered this topic in his 2023 [video](https://youtu.be/w5fcff63agY?si=CBhvuYhpmoFMVCqe)
