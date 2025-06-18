@@ -55,4 +55,4 @@ This could be further improved by adding postcode as an input in apps.yaml as be
   carbon_intensity: 're:(sensor.carbon_intensity_postcode)'
   postcode: LE16 9xy
 ```
-Although this is my concept, the rest sensor yaml was pretyy much written for me by @Troon in the HA community forum. Thank you!
+Although this is my concept, the rest sensor yaml was pretty much written for me by @Troon in the HA community forum. Thank you!
