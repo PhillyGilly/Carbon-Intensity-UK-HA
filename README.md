@@ -37,7 +37,7 @@ This GET can be used to create a rest sensor in Home Assistant with the followin
 UK post codes are made up of two parts the outward, which is the post town plus a number, and the inward which defines the local street number.
 The Carbon intensity values returned are calculated for each Distribution Network Operator (DNO) which can be found from the first outward part of a postcode.
 
-Create an text input helper called input_test.postcode_outward as below:
+Create an text input helper called input_text.postcode_outward as below:
 
 ![image](https://github.com/user-attachments/assets/77928cec-ee24-4ba2-9d60-e39e7cc86a36)
 
@@ -59,12 +59,13 @@ In rest.yaml
       unit_of_measurement: 'g/kWh'
       icon: 'mdi:molecule-co2'
       availability: "{{ value_json is defined }}"
-      value_template: "{{ value_json['data'][0]['data'][0]['intensity']['forecast'] }}"```
+      value_template: "{{ value_json['data'][0]['data'][0]['intensity']['forecast'] }}"
+```
 
 
 This could be further improved by adding postcode as an input in apps.yaml as below
 ```
-  # Carbon Intensity data from National grid
+  Carbon Intensity data from National grid
   carbon_intensity: 're:(sensor.carbon_intensity_postcode)'
   postcode: LE16 9xy
 ```
