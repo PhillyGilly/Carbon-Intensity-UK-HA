@@ -40,7 +40,7 @@ The Carbon intensity values returned are calculated for each Distribution Networ
 ## Steps:
 1. Create an text input helper called input_text.postcode_outward as below:
 
-![image](https://github.com/user-attachments/assets/77928cec-ee24-4ba2-9d60-e39e7cc86a36)
+![image](https://github.com/user-attachments/assets/c7807173-b2a4-423b-afef-2675157f9ebc)
 
 
 2. Add this line in configuration.yaml
