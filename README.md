@@ -60,7 +60,7 @@ rest: !include rest.yaml
       unit_of_measurement: 'g/kWh'
       icon: 'mdi:molecule-co2'
       availability: "{{ value_json is defined }}"
-      value_template: "{{ value_json['data'][0]['data'][0]['intensity']['forecast'] }}"
+      value_template: "{{ value_json['data'][0]['data'][0]['intensity']['forecast']|float|round(0) }}"
 ```
 4. Add an entities card
 ```
@@ -91,6 +91,10 @@ Borrowing unashamedly from @Olivershingler and with a bit of encouragement from 
 
 Here are the cards.
 
+![image](https://github.com/user-attachments/assets/76348e05-e153-4e7f-99cf-83e64aa65b03)
+
+![image](https://github.com/user-attachments/assets/26d27bed-573c-4bdd-a019-9a1be5259f24)
+
 Here is the code in rest.yaml:
 ```
     - name: "Carbon Intensity genmix coal"
@@ -98,56 +102,56 @@ Here is the code in rest.yaml:
       unit_of_measurement: '%'
       icon: mdi:molecule-co2
       availability: "{{ value_json is defined }}"
-      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','coal')|first)['perc']|round(1) }}"
+      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','coal')|first)['perc']|float|round(1) }}"
 
     - name: "Carbon Intensity genmix imports"
       unique_id: carbonintensitygenmiximports
       unit_of_measurement: '%'
       icon: mdi:transmission-tower-import
       availability: "{{ value_json is defined }}"
-      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','imports')|first)['perc']|round(1) }}"
+      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','imports')|first)['perc']|float|round(1) }}"
 
     - name: "Carbon Intensity genmix gas"
       unique_id: carbonintensitygenmixgas
       unit_of_measurement: '%'
       icon: mdi:fire-circle
       availability: "{{ value_json is defined }}"
-      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','gas')|first)['perc']|round(1) }}"
+      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','gas')|first)['perc']|float|round(1) }}"
 
     - name: "Carbon Intensity genmix nuclear"
       unique_id: carbonintensitygenmixnuclear
       unit_of_measurement: '%'
       icon: mdi:atom
       availability: "{{ value_json is defined }}"
-      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','nuclear')|first)['perc']|round(1) }}"
+      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','nuclear')|first)['perc']|float|round(1) }}"
 
     - name: "Carbon Intensity genmix other"
       unique_id: carbonintensitygenmixother
       unit_of_measurement: '%'
       icon: mdi:molecule-co2
       availability: "{{ value_json is defined }}"
-      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','other')|first)['perc']|round(1) }}"
+      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','other')|first)['perc']|float|round(1) }}"
 
     - name: "Carbon Intensity genmix hydro"
       unique_id: carbonintensitygenmixhydro
       unit_of_measurement: '%'
       icon: mdi:hydro-power
       availability: "{{ value_json is defined }}"
-      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','hydro')|first)['perc']|round(1) }}"
+      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','hydro')|first)['perc']|float|round(1) }}"
 
     - name: "Carbon Intensity genmix solar"
       unique_id: carbonintensitygenmixsolar
       unit_of_measurement: '%'
       icon: mdi:solar-panel-large
       availability: "{{ value_json is defined }}"
-      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','solar')|first)['perc']|round(1) }}"
+      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','solar')|first)['perc']|float|round(1) }}"
 
     - name: "Carbon Intensity genmix wind"
       unique_id: carbonintensitygenmixwind
       icon: mdi:wind-turbine
       unit_of_measurement: '%'
       availability: "{{ value_json is defined }}"
-      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','wind')|first)['perc']|round(1) }}"
+      value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','wind')|first)['perc']|float|round(1) }}"
 ```
 Here is the code for the auto entities cards (you my need to get this custom card from HACs:
 ```
