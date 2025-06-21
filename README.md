@@ -91,7 +91,7 @@ Borrowing unashamedly from @Olivershingler and with a bit of encouragement from 
 
 Here are the cards.
 
-![image](https://github.com/user-attachments/assets/76348e05-e153-4e7f-99cf-83e64aa65b03)
+![image](https://github.com/user-attachments/assets/7f614320-ff9b-4b66-9da8-f47997c98b93)
 
 ![image](https://github.com/user-attachments/assets/26d27bed-573c-4bdd-a019-9a1be5259f24)
 
@@ -153,7 +153,7 @@ Here is the code in rest.yaml:
       availability: "{{ value_json is defined }}"
       value_template: "{{ (value_json['data'][0]['data'][0]['generationmix']|selectattr('fuel','==','wind')|first)['perc']|float|round(1) }}"
 ```
-Here is the code for the auto entities cards (you my need to get this custom card from HACs:
+Here is the code for the auto entities cards (you my need to get this custom card from HACs):
 ```
 type: custom:auto-entities
 card:
@@ -165,14 +165,23 @@ filter:
     - state: < 0.1
 entities:
   - entity: sensor.carbon_intensity_genmix_biomass
+    name: Biomass
   - entity: sensor.carbon_intensity_genmix_coal
+    name: Coal
   - entity: sensor.carbon_intensity_genmix_gas
+    name: Gas
   - entity: sensor.carbon_intensity_genmix_hydro
+    name: Hydro
   - entity: sensor.carbon_intensity_genmix_imports
+    name: Imports
   - entity: sensor.carbon_intensity_genmix_nuclear
+    name: Nuclear
   - entity: sensor.carbon_intensity_genmix_other
+    name: Other
   - entity: sensor.carbon_intensity_genmix_solar
+    name: Solar
   - entity: sensor.carbon_intensity_genmix_wind
+    name: Wind
 state_color: true
 show_header_toggle: false
 title: Carbon Intensity
@@ -181,7 +190,7 @@ sort:
   reverse: true
   method: state
 ```
-Here is the code for the guage:
+Here is the code for the gauge:
 ```
 type: gauge
 name: Grid Carbon Intensity
